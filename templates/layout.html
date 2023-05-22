@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Desafio Técnico - Serasa</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
+  <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+
+<body>
+  <nav
+    class="mx-auto block w-full max-w-screen-xl rounded-xl border border-white/80 bg-white bg-opacity-80 py-2 px-4 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+    <div>
+      <div class="container mx-auto flex items-center justify-between text-gray-900">
+        <a href="/"
+          class="mr-4 block cursor-pointer py-1.5 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+          <span>Desafio Técnico - SERASA</span>
+        </a>
+        <ul class="hidden items-center gap-6 lg:flex">
+          <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+            <a class="flex items-center" href="/usuarios/listar">
+              Usuários
+            </a>
+          </li>
+          <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+            <a class="flex items-center" href="/usuarios/json">
+              Usuários (JSON)
+            </a>
+          </li>
+          <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+            <a class="flex items-center" href="/pedidos/listar">
+              Pedidos
+            </a>
+          </li>
+          <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
+            <a class="flex items-center" href="/pedidos/json">
+              Pedidos (JSON)
+            </a>
+          </li>
+        </ul>
+        <button
+          class="middle none center hidden rounded-lg bg-gradient-to-tr from-gray-600 to-black py-2 px-4 font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-500/20 transition-all hover:shadow-lg hover:shadow-gray-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+          type="button" data-ripple-light="true">
+          <span>Contato</span>
+        </button>
+        <button
+          class="middle none relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] rounded-lg text-center font-sans text-xs font-medium uppercase text-blue-gray-500 transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden"
+          data-collapse-target="navbar">
+          <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container pt-4">
+    {% block body %}
+    {% endblock %}
+  </div>
+  <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js"></script>
+  <script>
+    const btnDelete = document.querySelectorAll('.btn-delete');
+    if (btnDelete) {
+      const btnArray = Array.from(btnDelete);
+      btnArray.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          if (!confirm('Deseja realmente excluir este registro?')) {
+            e.preventDefault();
+          }
+        });
+      })
+    }
+
+    $(document).ready(function () {
+      $('#tabela').DataTable({
+        "aLengthMenu": [
+          [3, 5, 10, 25, -1],
+          [3, 5, 10, 25, "All"]
+        ],
+        "iDisplayLength": 3
+      });
+    });
+  </script>
+
+</body>
+
+</html>
